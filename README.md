@@ -10,8 +10,10 @@ This repository is supported by community contributions.
 
 Example
 
+```
 ---
 - hosts: localhost
   gather_facts: true
   roles:
     - {role: lynis-ansible, lynis_use_packages: yes, lynis_audit_system_linux: yes}
+```
