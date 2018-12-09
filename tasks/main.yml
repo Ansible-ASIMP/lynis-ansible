@@ -1,6 +1,7 @@
 ---
-
-
+# Include variables and define needed variables.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Lynis | Install Lynis (Debian | Ubuntu)
   include: debian.yml
