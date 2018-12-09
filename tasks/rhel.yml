@@ -1,7 +1,4 @@
 ---
-
-
-
 - name: Lynis | Install Lynis from yum
   yum:
     name: lynis

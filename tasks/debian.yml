@@ -1,5 +1,4 @@
 ---
-
 - name: Lynis | Install Lynis from apt
   apt:
     name=lynis
