@@ -1,5 +1,5 @@
 ---
-- name: Run Lynis basic scan
-  command: lynis audit system --quick
+- name: Run Lynis pentest scan
+  command: lynis audit system --quick --pentest -c --auditor "ASIMP"
   when: lynis_audit_system_linux is defined
   tags: lynis
