@@ -1,0 +1,5 @@
+---
+- name: Run Lynis basic scan
+  command: lynis audit system --quick
+  when: lynis_audit_system_linux is defined
+  tags: lynis

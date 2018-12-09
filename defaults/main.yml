@@ -11,3 +11,5 @@ lynis_tarball_unpackdest_dir: '{{ lynis_tarball_unpackdest }}/lynis'
 lynis_tarball_dest: '{{ lynis_tarball_unpackdest_dir }}/{{ lynis_name }}.tar.gz'
 
 lynis_use_packages: no
+
+lynis_audit_system_linux: no
