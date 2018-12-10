@@ -1,4 +1,16 @@
 ---
+- name: Install Lynis Repository
+  block:
+    - name: Add Public Key
+      apt_key:
+        url: https://packages.cisofy.com/keys/cisofy-software-public.key
+        state: present
+    - name: Install Lynis Repo
+      apt_repository:
+        repo: deb https://packages.cisofy.com/community/lynis/deb/ stable main
+        state: present
+        filename: cisofy-lynis
+
 - name: Lynis | Install Lynis from apt
   apt:
     name=lynis

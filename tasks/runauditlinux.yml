@@ -2,4 +2,6 @@
 - name: Run Lynis pentest scan
   command: lynis audit system --quick --pentest -c --auditor "ASIMP"
   when: lynis_audit_system_linux is defined
+  async: 45
+  poll: 5
   tags: lynis
