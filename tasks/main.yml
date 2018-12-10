@@ -22,9 +22,9 @@
   when: lynis_use_packages is defined and not lynis_use_packages
   tags: lynis
 
-### lynis_audit_system 0912201uuditlinux.yml
+### lynis_audit_system 09122018 auditlinux.yml
 
-- name: Lynis | Run Lynis basic for Linux
+- name: Lynis | Run Lynis for Linux
   include: runauditlinux.yml
   when: lynis_audit_system_linux is defined and lynis_audit_system_linux
   tags: lynis
