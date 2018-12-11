@@ -5,11 +5,16 @@
       apt_key:
         url: https://packages.cisofy.com/keys/cisofy-software-public.key
         state: present
+      when:
+        ansible_os_family == 'Debian' or ansible_os_family == 'Ubuntu'
+
     - name: Install Lynis Repo
       apt_repository:
         repo: deb https://packages.cisofy.com/community/lynis/deb/ stable main
         state: present
         filename: cisofy-lynis
+      when:
+        ansible_os_family == 'Debian' or ansible_os_family == 'Ubuntu'
 
 - name: Lynis | Install Lynis from apt
   apt:
@@ -20,3 +25,5 @@
     update_cache=yes
   register: lynis_isinstalled
   tags: lynis
+  when:
+    ansible_os_family == 'Debian' or ansible_os_family == 'Ubuntu'
