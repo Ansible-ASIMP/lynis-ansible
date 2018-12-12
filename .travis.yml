@@ -1,29 +1,35 @@
 ---
+dist: bionic
 sudo: required
 
-env:
-  - distribution: centos
-    version: 7
-  - distribution: ubuntu
-    version: bionic
-  - distribution: ubuntu
-    version: xenial
+language: python
+python:
+  - "2.7"
 
 services:
   - docker
 
 before_install:
-  - 'sudo docker pull ${distribution}:${version}'
-  - 'sudo docker build --no-cache --rm --file=travis/Dockerfile.${distribution}-${version} --tag=${distribution}-${version}:ansible travis'
+  - deactivate
+  - |
+    sudo apt-key adv --recv-keys \
+      --keyserver keyserver.ubuntu.com 3B4FE6ACC0B21F32 40976EAF437D05B5
+  - sudo apt-get update -qq
+  - sudo apt-get install -y -o Dpkg::Options::="--force-confnew" docker-ce
+
+install:
+  - sudo pip install ansible ansible-lint docker-py molecule
+  - ansible --version
+  - molecule --version
+
+before_script:
+  - docker run -d --net=host lynis
+  - sudo apt-get install -y nginx
+  - sudo service nginx start
 
 script:
-  - container_id=$(mktemp)
-  - 'sudo docker run --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}":/etc/ansible/roles/lynis-ansible:ro ${distribution}-${version}:ansible > "${container_id}"'
-  - 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/lynis-ansible/travis/test.yml --syntax-check'
-  - 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/lynis-ansible/travis/test.yml'
-  - >
-    sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/lynis-ansible/travis/test.yml
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
-  - 'sudo docker rm -f "$(cat ${container_id})"'
+  - molecule test
+
+after_script:
+  - docker ps -a
+  - curl http://localhost
