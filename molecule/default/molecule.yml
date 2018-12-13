@@ -6,8 +6,8 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: centos7
-    image: milcom/centos7-systemd
+  - name: unbuntu1804
+    image: ubuntu:18.04
     privileged: true
 provisioner:
   name: ansible
