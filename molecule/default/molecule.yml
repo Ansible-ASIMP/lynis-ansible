@@ -2,22 +2,17 @@
 dependency:
   name: galaxy
 driver:
-  name: delegated
-  options:
-    ansible_connection_options:
-      connection: local
+  name: docker
 lint:
   name: yamllint
 platforms:
-  - name: delegated-travis-instance
+  - name: centos7
+    image: milcom/centos7-systemd
+    privileged: true
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
-  inventory:
-    host_vars:
-      delegated-travis-instance:
-        ansible_connection: local
 scenario:
   name: default
 verifier:

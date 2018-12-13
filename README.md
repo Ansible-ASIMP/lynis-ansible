@@ -15,5 +15,5 @@ Example
 - hosts: localhost
   gather_facts: true
   roles:
-    - {role: lynis-ansible, lynis_use_packages: yes, lynis_audit_system_linux: yes}
+    - {role: lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
 ```

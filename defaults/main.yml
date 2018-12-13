@@ -4,12 +4,12 @@ lynis_version: '2.7.0'
 lynis_name: 'lynis-{{ lynis_version }}'
 
 lynis_tarball_url: 'https://cisofy.com/files/{{ lynis_name }}.tar.gz'
-lynis_tarball_checksum: 'c9cb9b77dcdc782decbf06ddca30c0e853605b99029d8e86ade8449a0959be3b'
+lynis_sum: 'c9cb9b77dcdc782decbf06ddca30c0e853605b99029d8e86ade8449a0959be3b'
 
 lynis_tarball_unpackdest: '/opt'
 lynis_tarball_unpackdest_dir: '{{ lynis_tarball_unpackdest }}/lynis'
 lynis_tarball_dest: '{{ lynis_tarball_unpackdest_dir }}/{{ lynis_name }}.tar.gz'
 
-lynis_use_packages: no
+lynis_use_packages: false
 
-lynis_audit_system_linux: no
+lynis_audit_system_linux: false

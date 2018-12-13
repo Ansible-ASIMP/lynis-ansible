@@ -2,6 +2,14 @@
 - name: Run Lynis pentest scan
   command: lynis audit system --quick --pentest -c --auditor "ASIMP"
   when: lynis_audit_system_linux is defined
-  async: 45
-  poll: 5
+  async: 1000
+  poll: 0
   tags: lynis
+  register: lynis_sleeper
+
+- name: 'Lynis - check on async task'
+  async_status:
+    jid: "{{ lynis_sleeper.ansible_job_id }}"
+  register: lynis_job_result
+  until: lynis_job_result.finished
+  retries: 120
