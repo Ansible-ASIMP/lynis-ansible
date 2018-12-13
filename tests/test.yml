@@ -1,5 +1,12 @@
 ---
+# talk to all hosts just so we can learn about them
 - hosts: localhost
+  tasks:
+    - group_by:
+        key: os_{{ ansible_distribution }}
+
+- hosts: os_Ubuntu
+  gather_facts: true
   remote_user: root
   roles:
-    - lynis-ansible
+    - {role: lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}

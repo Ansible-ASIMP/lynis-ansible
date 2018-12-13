@@ -16,11 +16,12 @@ before_install:
   - sudo apt -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 install:
-  - sudo pip install ansible ansible-lint docker-py
+  - sudo pip install ansible ansible-lint docker-py molecule
   - ansible --version
+  - molecule --version
 
 script:
-  - ansible-playbook -v /etc/ansible/roles/lynis-ansible/test/test.yml --syntax-check
+  - molecule test
 
 after_script:
   - docker ps -a
