@@ -28,8 +28,9 @@ install:
 script:
   - echo "[default]\nhost_key_checking = False\n" > ansible.cfg
   - echo "[local]\nlocalhost ansible_connection=local" >> ansible.cfg
+  - export ANSIBLE_HOST_KEY_CHECKING=False
   - ansible-playbook -v -i tests/inventory tests/test.yml --syntax-check
-  - ansible-playbook -v -i tests/inventory tests/test.yml -vvvv
+  - ansible-playbook -e 'host_key_checking=False' -i tests/inventory tests/test.yml -vvvv
 
 after_script:
   - docker ps -a
