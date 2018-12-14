@@ -21,6 +21,7 @@ install:
 
 script:
   - ansible-playbook -v -i tests/inventory tests/test.yml --syntax-check
+  - ansible-playbook -v -i tests/inventory tests/test.yml -vvvv
 
 after_script:
   - docker ps -a
