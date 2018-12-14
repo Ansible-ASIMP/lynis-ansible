@@ -1,9 +1,11 @@
 ---
 matrix:
   include:
-    - os: linux
+    - name: "Ubuntu Bionic Test"
+      os: linux
       dist: bionic
-    - os: linux
+    - name: "Ubuntu Xenial Test"
+      os: linux
       dist: xenial
 
 sudo: required
