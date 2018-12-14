@@ -26,7 +26,8 @@ install:
   - ansible --version
 
 script:
-  - echo "[default]\nhost_key_checking = False\n" > ansible.cfg
+  - echo "[default]\nhost_key_checking = False" > ansible.cfg
+  - echo "[default]\nansible_ssh_common_args='-o StrictHostKeyChecking=no'\n" >> ansible.cfg
   - echo "[local]\nlocalhost ansible_connection=local" >> ansible.cfg
   - export ANSIBLE_HOST_KEY_CHECKING=False
   - ansible-playbook -v -i tests/inventory tests/test.yml --syntax-check
