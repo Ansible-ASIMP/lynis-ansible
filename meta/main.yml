@@ -1,6 +1,6 @@
 galaxy_info:
   author: All Contributors
-  description: For community
+  description: Ansible role to install, configure and run Lynis for Linux Debian / Ubuntu / Centos / RedHat
   company: For community
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -40,6 +40,7 @@ galaxy_info:
    - name: Ubuntu
      versions:
      - bionic
+     - xenial
   #   - 25
   # - name: SomePlatform
   #   versions:
