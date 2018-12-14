@@ -17,7 +17,7 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
 	    sudo systemctl restart docker
 	    sleep 5
 	    sudo docker run hello-world
-	    sudo pip install docker-py
+	    sudo -H pip install docker-py
 	    ;;
 	  centos7)
 	     # Travis CI not yet support Centos we keep this for future
@@ -33,7 +33,7 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
 	    sudo systemctl restart docker
 	    sleep 5
 	    sudo docker run hello-world
-	    sudo pip install docker-py
+	    sudo -H pip install docker-py
 	    ;;
 	 esac
   else
