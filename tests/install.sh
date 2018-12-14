@@ -5,11 +5,7 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
 	 case "$TOXENV" in
           ubuntu)
             # Install some custom on Ubuntu Ansible doesn't play well with virtualenv
-            deactivate
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-            sudo apt update -qq
-            sudo apt -y -o Dpkg::Options::="--force-confnew" install docker-ce
+	    echo "Ubuntu"
             sudo pip install docker-py
             sudo apt install -y sshpass software-properties-common python-software-properties
             sudo apt-add-repository -y ppa:ansible/ansible
@@ -19,6 +15,7 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
 	    ;;
 	  centos)
 	    echo "Centos"
+            deactivate
 	    ;;
 	 esac
   else

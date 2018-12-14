@@ -19,6 +19,9 @@ cache: pip
 services:
   - docker
 
+before_install:
+  - tests/b4install.sh
+
 install:
   - tests/install.sh
 
