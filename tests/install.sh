@@ -15,7 +15,7 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
 	  centos7)
 	    echo "Docker Centos7"
 	    sudo docker pull centos:7
-	    sudo docker build --no-cache --rm --file=tests/Dockerfile.centos7 --tag=centos7:ansible travis
+	    sudo docker build --no-cache --rm --file=tests/Dockerfile.centos7 --tag=centos7:ansible tests
 	    ;;
 	 esac
   else
