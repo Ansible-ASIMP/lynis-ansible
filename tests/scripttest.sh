@@ -19,14 +19,14 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
 	  centos7)
 	    echo "Run in Docker Centos7"
             container_id=$(mktemp)
-	    PWD=`pwd`
-            'sudo docker run --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume=`pwd`:`pwd`:ro centos7:ansible > "${container_id}"'
+	    PWD=$(pwd)
+            'sudo docker run --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume=$PWD:/etc/ansible/roles/lynis-ansible:rw centos7:ansible > "${container_id}"'
 	    DOCKER_CONTAINER_ID=$(docker ps | grep centos | awk '{print $1}')
             docker logs $DOCKER_CONTAINER_ID
 	    sudo cat ${container_id}
-            'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v tests/test.yml --syntax-check'
-            'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v tests/test.yml'
-	    'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -e 'host_key_checking=False' -i tests/inventory tests/test.yml --connection=local | grep -q 'failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)'
+            'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/lynis-ansible/tests/test.yml --syntax-check'
+            'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/lynis-ansible/tests/test.yml'
+	    'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -e 'host_key_checking=False' -i /etc/ansible/roles/lynis-ansible/tests/inventory /etc/ansible/roles/lynis-ansible/tests/test.yml --connection=local | grep -q 'failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)'
             'sudo docker rm -f "$(cat ${container_id})"'
 	    ;;
 	 esac

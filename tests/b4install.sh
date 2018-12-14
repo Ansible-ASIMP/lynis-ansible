@@ -13,7 +13,9 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
             sudo apt dist-upgrade -y
             sudo apt -y -o Dpkg::Options::="--force-confnew" install docker-ce
             docker --version
-	    sudo systemctl start docker
+	    echo 'DOCKER_OPTS="-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s devicemapper"' | sudo tee /etc/default/docker > /dev/null
+	    sudo systemctl restart docker
+	    sleep 5
 	    sudo docker run hello-world
 	    sudo pip install docker-py
 	    ;;
@@ -27,7 +29,9 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
             #sudo apt dist-upgrade -y
             sudo apt -y -o Dpkg::Options::="--force-confnew" install docker-ce
             docker --version
-	    sudo systemctl start docker
+	    echo 'DOCKER_OPTS="-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s devicemapper"' | sudo tee /etc/default/docker > /dev/null
+	    sudo systemctl restart docker
+	    sleep 5
 	    sudo docker run hello-world
 	    sudo pip install docker-py
 	    ;;
