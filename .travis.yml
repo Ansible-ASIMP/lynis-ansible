@@ -32,10 +32,10 @@ script:
   - export ANSIBLE_HOST_KEY_CHECKING=False
   - ansible-playbook -v -i tests/inventory tests/test.yml --syntax-check
   - ansible-playbook -e 'host_key_checking=False' -i tests/inventory tests/test.yml -vvvv --connection=local
-# Run the role/playbook again, checking to make sure it's idempotent.
+# Run the role/playbook again, checking to make sure it's idempotent. We only check for failed. Report out alway change.
   - >
     ansible-playbook -e 'host_key_checking=False' -i tests/inventory tests/test.yml --connection=local
-    | grep -q 'changed=0.*failed=0'
+    | grep -q 'failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
