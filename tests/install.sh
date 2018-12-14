@@ -4,7 +4,6 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
   then
 	 case "$TOXENV" in
           ubuntu)
-            # Install some custom on Ubuntu Ansible doesn't play well with virtualenv
 	    echo "Ubuntu"
             sudo apt install -y sshpass software-properties-common python-software-properties
             sudo apt-add-repository -y ppa:ansible/ansible
@@ -13,16 +12,10 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
             ansible --version
 	    ansible -m ping all
 	    ;;
-	  centos)
-	    echo "Centos"
-	    sudo systemctl start docker
-	    sudo docker run hello-world
-	    rpm --import https://archive.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
-	    rpm --import https://archive.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7Server
-	    sudo yum install epel-release
-	    sudo yum install ansible
-	    ansible --version
-	    ansible -m ping all
+	  centos7)
+	    echo "Docker Centos7"
+	    sudo docker pull centos:7
+	    sudo docker build --no-cache --rm --file=tests/Dockerfile.centos7 --tag=centos7:ansible travis
 	    ;;
 	 esac
   else

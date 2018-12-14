@@ -9,10 +9,11 @@ matrix:
       os: linux
       dist: xenial
       env: TOXENV=ubuntu
-      #    - name: "Centos 7.x Test"
-      #os: linux
-      #dist: bionic
-      #env: TOXENV=centos
+    - name: "Centos 7.x Test"
+      os: linux
+      dist: bionic
+      # This to call docker for centos7
+      env: TOXENV=centos7
 
 sudo: required
 language: python
@@ -30,18 +31,7 @@ install:
   - tests/install.sh
 
 script:
-  - echo "[default]\nhost_key_checking = False" > ansible.cfg
-  - echo "[default]\nansible_ssh_common_args='-o StrictHostKeyChecking=no'\n" >> ansible.cfg
-  - echo "[local]\nlocalhost ansible_connection=local" >> ansible.cfg
-  - export ANSIBLE_HOST_KEY_CHECKING=False
-  - ansible-playbook -v -i tests/inventory tests/test.yml --syntax-check
-  - ansible-playbook -e 'host_key_checking=False' -i tests/inventory tests/test.yml -vvvv --connection=local
-# Run the role/playbook again, checking to make sure it's idempotent. We only check for failed. Report out alway change.
-  - >
-    ansible-playbook -e 'host_key_checking=False' -i tests/inventory tests/test.yml --connection=local
-    | grep -q 'failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
+  - tests/scripttest.sh
 
 after_script:
   - docker ps -a
