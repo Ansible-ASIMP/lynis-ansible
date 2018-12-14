@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  connection: local
+  become: true
   tasks:
     - group_by:
         key: os_{{ ansible_distribution }}
