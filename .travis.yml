@@ -20,7 +20,7 @@ services:
   - docker
 
 install:
-  - sudo tests/install.sh
+  - tests/install.sh
 
 script:
   - echo "[default]\nhost_key_checking = False" > ansible.cfg
