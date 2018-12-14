@@ -20,7 +20,7 @@ install:
   - ansible --version
 
 script:
-  - ansible-playbook -v /etc/ansible/roles/lynis-ansible/test/test.yml --syntax-check
+  - ansible-playbook -v -i tests/inventory tests/test.yml --syntax-check
 
 after_script:
   - docker ps -a
