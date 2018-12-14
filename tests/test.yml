@@ -7,7 +7,7 @@
         key: os_{{ ansible_distribution }}
 
   pre_tasks:
-    - name: Ensure build dependencies are installed (RedHat)
+    - name: Ensure build dependencies are installed (RedHat / Centos)
       package:
         name: "{{ item }}"
         state: present
@@ -20,7 +20,7 @@
       when:
         ansible_os_family == 'CentOS' or ansible_os_family == 'RedHat'
 
-    - name: Ensure build dependencies are installed (Debian)
+    - name: Ensure build dependencies are installed (Debian / Ubuntu)
       package:
         name: "{{ item }}"
         state: present
@@ -32,7 +32,16 @@
       when:
         ansible_os_family == 'Debian' or ansible_os_family == 'Ubuntu'
 
-- hosts: 127.0.0.1
+- hosts: os_Ubuntu
+  gather_facts: true
+  connection: local
+  become: true
+  roles:
+    - {role: ../../lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
+# Patch should be change depending on git project path
+
+- hosts: os_Centos
+  gather_facts: true
   connection: local
   become: true
   roles:

@@ -32,8 +32,8 @@
   when: lynis_audit_system_linux is defined
   cron:
     name: Lynis | Add Lynis to cron.d
-    minute: "{{ 59 |random }}"
-    hour: "{{ 4|random }}"
+    minute: "{{ 59 | random }}"
+    hour: "{{ 4 | random }}"
     user: root
     job: "lynis audit system --quick --pentest -c"
     cron_file: lynis

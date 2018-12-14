@@ -8,6 +8,8 @@ Lynis is a security auditing tool for systems running Linux, Mac OS X, BSD, or s
 
 This repository is supported by community contributions.
 
+Forked from CISOfy/lynis-ansible
+
 Example
 
 ```
