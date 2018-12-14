@@ -37,4 +37,4 @@
   become: true
   remote_user: root
   roles:
-    - {role: lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
+    - {role: ../roles/lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
