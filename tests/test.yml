@@ -37,5 +37,5 @@
   become: true
   remote_user: root
   roles:
-    - {role: ../../../roles/lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
+    - {role: ../../lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
 # Patch should be change depending on git project path
