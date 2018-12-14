@@ -1,6 +1,5 @@
 ---
-# talk to all hosts just so we can learn about them
-- hosts: all
+- hosts: localhost
   tasks:
     - group_by:
         key: os_{{ ansible_distribution }}
@@ -35,7 +34,6 @@
   gather_facts: true
   connection: local
   become: true
-  remote_user: root
   roles:
     - {role: ../../lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
 # Patch should be change depending on git project path
