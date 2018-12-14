@@ -26,7 +26,8 @@ install:
   - ansible --version
 
 script:
-  - echo "[local]\nlocalhost ansible_connection=local" > ansible.cfg
+  - echo "[default]\nhost_key_checking = False\n" > ansible.cfg
+  - echo "[local]\nlocalhost ansible_connection=local" >> ansible.cfg
   - ansible-playbook -v -i tests/inventory tests/test.yml --syntax-check
   - ansible-playbook -v -i tests/inventory tests/test.yml -vvvv
 
