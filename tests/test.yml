@@ -30,8 +30,7 @@
       when:
         ansible_os_family == 'Debian' or ansible_os_family == 'Ubuntu'
 
-- hosts: os_Ubuntu
-  gather_facts: true
+- hosts: localhost
   connection: local
   become: true
   roles:
