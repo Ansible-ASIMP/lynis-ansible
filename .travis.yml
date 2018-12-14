@@ -20,7 +20,7 @@ install:
   - ansible --version
 
 script:
-  - echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
+  - echo "[local]\nlocalhost ansible_connection=local" > ansible.cfg
   - ansible-playbook -v -i tests/inventory tests/test.yml --syntax-check
   - ansible-playbook -v -i tests/inventory tests/test.yml -vvvv
 
