@@ -25,10 +25,11 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
 	    DOCKER_CONTAINER_ID=$(docker ps | grep centos7 | awk '{print $1}')
             docker logs $DOCKER_CONTAINER_ID
 	    echo $DOCKER_CONTAINER_ID
-            'sudo docker exec "$(echo ${DOCKER_CONTAINER_ID})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/lynis-ansible/tests/test.yml --syntax-check'
-            'sudo docker exec "$(echo ${DOCKER_CONTAINER_ID})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/lynis-ansible/tests/test.yml'
-	    'sudo docker exec "$(echo ${DOCKER_CONTAINER_ID})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -e 'host_key_checking=False' -i /etc/ansible/roles/lynis-ansible/tests/inventory /etc/ansible/roles/lynis-ansible/tests/test.yml --connection=local | grep -q 'failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)'
-            'sudo docker rm -f "$(echo ${DOCKER_CONTAINER_ID})"'
+###    docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec "bash -xe /htcondor-ce/tests/test_inside_docker.sh ${OS_VERSION};   echo -ne \"------\nEND HTCONDOR-CE TESTS\n\";"
+            'sudo docker exec -ti "$(echo ${DOCKER_CONTAINER_ID})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/lynis-ansible/tests/test.yml --syntax-check'
+            'sudo docker exec -ti "$(echo ${DOCKER_CONTAINER_ID})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/lynis-ansible/tests/test.yml'
+	    'sudo docker exec -ti "$(echo ${DOCKER_CONTAINER_ID})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -e 'host_key_checking=False' -i /etc/ansible/roles/lynis-ansible/tests/inventory /etc/ansible/roles/lynis-ansible/tests/test.yml --connection=local | grep -q 'failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)'
+####            'sudo docker rm -f "$(echo ${DOCKER_CONTAINER_ID})"'
 	    ;;
 	 esac
   else
