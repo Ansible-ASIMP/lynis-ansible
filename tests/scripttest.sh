@@ -19,7 +19,8 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]
 	  centos7)
 	    echo "Run in Docker Centos7"
 	    PWD=$(pwd)
-            sudo -E docker run --detach --privileged --name centos7 --mount source=$PWD,target=/etc/ansible/roles/lynis-ansible centos7:ansible
+	    echo "current working dir $PWD - This will be used to mount docker volume"
+            sudo docker run --detach --privileged --name centos7 --mount source=/home/travis/build/Ansible-ASIMP/lynis-ansible,target=/etc/ansible/roles/lynis-ansible centos7:ansible
             docker inspect centos7
 	    DOCKER_CONTAINER_ID=$(docker ps | grep centos7 | awk '{print $1}')
             docker logs $DOCKER_CONTAINER_ID
