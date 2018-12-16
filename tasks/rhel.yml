@@ -1,4 +1,30 @@
 ---
+- name: Yum Add repositories
+  yum_repository:
+    name: Lynis | Add Repo
+    description: Lynis RPM Repo
+    file: lynis
+    baseurl: https://packages.cisofy.com/community/lynis/rpm/
+    gpgkey: https://packages.cisofy.com/keys/cisofy-software-rpms-public.key
+    gpgcheck: yes
+    enabled: yes
+  when:
+    ansible_os_family == 'CentOS' or ansible_os_family == 'RedHat'
+  tags: lynis
+
+- name: Lynis | ensure a list of packages installed
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - ca-certificates
+    - curl
+    - nss
+    - openssl
+  when:
+    ansible_os_family == 'CentOS' or ansible_os_family == 'RedHat'
+  tags: lynis
+
 - name: Lynis | Install Lynis from yum
   yum:
     name: lynis
@@ -6,6 +32,8 @@
     update_cache: yes
     disable_gpg_check: no
   register: lynis_isinstalled
+  when:
+    ansible_os_family == 'CentOS' or ansible_os_family == 'RedHat'
   tags: lynis
 
 - name: Creates a cron file under /etc/cron.d
@@ -17,4 +45,6 @@
     user: root
     job: "lynis audit system --quick --pentest -c"
     cron_file: lynis
+  when:
+    ansible_os_family == 'CentOS' or ansible_os_family == 'RedHat'
   tags: lynis
