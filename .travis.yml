@@ -25,6 +25,11 @@ services:
   - docker
 
 before_install:
+  - free -m
+  - df -h
+  - uname -a
+  - uptime
+  - dmesg
   - tests/b4install.sh
 
 install:
