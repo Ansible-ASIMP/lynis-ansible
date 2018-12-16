@@ -30,8 +30,8 @@ services:
   - docker
 
 before_install:
-  - free -m
   - df -h
+  - free -m
   - uname -a
   - uptime
   - dmesg
