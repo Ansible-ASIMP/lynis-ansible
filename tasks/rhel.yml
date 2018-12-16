@@ -45,6 +45,4 @@
     user: root
     job: "lynis audit system --quick --pentest --cronjob --nocolors"
     cron_file: lynis
-  when:
-    ansible_os_family == 'CentOS' or ansible_os_family == 'RedHat'
   tags: lynis
