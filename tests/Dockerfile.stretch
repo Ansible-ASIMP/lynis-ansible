@@ -8,7 +8,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     python-dev \
     python-pip \
     git \
-    cronie \
+    cron \
     systemd \
  && rm -rf /var/lib/apt/lists/*
 
