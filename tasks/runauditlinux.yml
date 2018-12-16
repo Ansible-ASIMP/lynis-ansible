@@ -1,6 +1,6 @@
 ---
 - name: Run Lynis pentest scan
-  command: lynis audit system --quick --pentest -c --auditor "ASIMP"
+  command: lynis audit system --quick --pentest --nocolors --auditor "ASIMP"
   when: lynis_audit_system_linux is defined
   async: 1000
   poll: 0

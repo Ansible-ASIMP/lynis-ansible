@@ -35,6 +35,6 @@
     minute: "{{ 59 | random }}"
     hour: "{{ 4 | random }}"
     user: root
-    job: "lynis audit system --quick --pentest -c"
+    job: "lynis audit system --quick --pentest --cronjob --nocolors"
     cron_file: lynis
   tags: lynis
