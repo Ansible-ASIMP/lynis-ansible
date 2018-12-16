@@ -14,6 +14,11 @@ matrix:
       dist: bionic
       # This to call docker for centos7
       env: TOXENV=centos7
+    - name: "Debian Stretch Test"
+      os: linux
+      dist: bionic
+      # This to call docker for stretch
+      env: TOXENV=stretch
 
 sudo: required
 language: python

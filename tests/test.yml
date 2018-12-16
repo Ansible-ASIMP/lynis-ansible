@@ -32,7 +32,7 @@
       when:
         ansible_os_family == 'Debian' or ansible_os_family == 'Ubuntu'
 
-- hosts: os_Ubuntu
+- hosts: 127.0.0.1
   gather_facts: true
   connection: local
   become: true
@@ -40,10 +40,27 @@
     - {role: ../../lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
 # Patch should be change depending on git project path
 
-- hosts: os_Centos
-  gather_facts: true
-  connection: local
-  become: true
-  roles:
-    - {role: ../../lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
+#
+#- hosts: os_Ubuntu
+#  gather_facts: true
+#  connection: local
+#  become: true
+#  roles:
+#    - {role: ../../lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
+# Patch should be change depending on git project path
+#
+#- hosts: os_Ubuntu
+#  gather_facts: true
+#  connection: local
+#  become: true
+#  roles:
+#    - {role: ../../lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
+# Patch should be change depending on git project path
+#
+#- hosts: os_Centos
+#  gather_facts: true
+#  connection: local
+#  become: true
+#  roles:
+#    - {role: ../../lynis-ansible, lynis_use_packages: true, lynis_audit_system_linux: true}
 # Patch should be change depending on git project path
