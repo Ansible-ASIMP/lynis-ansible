@@ -1,7 +1,7 @@
 ---
-- name: Yum Add repositories
+- name: Lynis | Yum Add repositories
   yum_repository:
-    name: Lynis | Add Repo
+    name: lynis
     description: Lynis RPM Repo
     file: lynis
     baseurl: https://packages.cisofy.com/community/lynis/rpm/
